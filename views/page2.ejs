@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+    <title>Products</title>
+  </head>
+  <body>
+    <h1 class="text-center m-3">Actualizar Producto</h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4 p-5">
+      <div class="col">
+        <div class="card p-2 mx-2 bg-light">
+          <h5>Ingrese los nuevos datos</h5>
+          <form
+            action="/actProd"
+            method="put"
+            class="row g-3 needs-validation"
+            novalidate
+          >
+            <div class="form-floating mb-6">
+              <input type="text" class="form-control" name="name" />
+              <label for="floatingInput">Nombre</label>
+            </div>
+            <div class="form-floating">
+              <input type="text" class="form-control" name="price" />
+              <label for="floatingInput">Precio</label>
+            </div>
+            <div class="form-floating">
+              <input type="url" class="form-control" name="url" />
+              <label for="floatingInput"> (URL) Foto del Producto</label>
+            </div>
+            <div class="col-12">
+              <button class="btn btn-primary" type="submit">Actualizar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="card col-md-7 mx-5 text-center bg-light">
+        <% if(pepe.length == 0) { %>
+        <h2>No hay productos ingresados !!</h2>
+        <% } else { %>
+        <table class="table">
+          <h5>Productos</h5>
+          <thead>
+            <tr>
+              <th scope="col">Nombre</th>
+              <th scope="col">Price</th>
+              <th scope="col">Foto del Producto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% pepe.forEach(pepe => { %>
+            <tr>
+              <td>* <%=pepe.name%></td>
+              <td>$ <%=pepe.price%></td>
+              <td><img src="<%=pepe.url%>" height="100px" /></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+        <% } %>
+      </div>
+    </div>
+
+    <!-- JavaScript Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
