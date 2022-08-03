@@ -1,15 +1,6 @@
 [
   {
     "id": 1,
-    "name": "Omnitrix",
-    "descripcion": "El Omnimatrix, (comúnmente conocido como el Omnitrix o Nuevo Omnitrix) es una de las más importantes creaciones de Azmuth y el sucesor del Ultimatrix y del Omnitrix original.",
-    "codigo": "1",
-    "price": "40",
-    "stock": "30",
-    "url": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Ben_10_Omnitrix.png"
-  },
-  {
-    "id": 2,
     "name": "Samsung s20",
     "descripcion": "El Galaxy S20 de Samsung es la nueva generación de la compañía surcoreana, un terminal que hace gala de la última tecnología de pantalla con un panel QHD+ con 120 Hz de refresco y 240 Hz de muestreo que monta una triple cámara y el Exynos 990 de ocho núcleos.",
     "codigo": "2",
@@ -18,7 +9,7 @@
     "url": "https://images.samsung.com/is/image/samsung/assets/ar/s20-buy/S20-FE_Navy_SKUimage_MO-img.jpg"
   },
   {
-    "id": 3,
+    "id": 2,
     "name": "Martillo bosh",
     "descripcion": "Martillo demoledor, con el peso justo, para trabajar tanto en demolición de paredes como también de pisos, con excelente prestaciones a la hora de fatiga en el trabajo, absorbe las vibraciones para no trasmitirlas al operario.",
     "codigo": "3",
@@ -27,7 +18,7 @@
     "url": "https://arcomaquinarias.com/producto/multimedia/tqXLDAU91o.jpg"
   },
   {
-    "id": 4,
+    "id": 3,
     "name": "El Pepe",
     "descripcion": "Es el pepeee",
     "codigo": "4",

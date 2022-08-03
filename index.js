@@ -5,7 +5,8 @@ const fs = require("fs");
 
 const PORT = 8080;
 
-const productos = require("../proyectoFinal/products/products.json");
+const productos = require("./products/products.json");
+const carrito = require("./carrito/carrito.json");
 
 const app = express();
 
@@ -14,7 +15,24 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: "true" }));
 
-// admin // Manipular los productos con FrontEnd //
+//routes //
+
+app.use("/api/products", routerProducts);
+app.use("/api/carrito", routerCarrito);
+
+// admin // Manipular los productos con FrontEnd // Opcion extra
+
+// app.use((req, res, next) => {
+//   if ("admin" in req.headers) {
+//     next();
+//   } else {
+//     res
+//       .status(500)
+//       .send(
+//         "Usted no es administrador, estas opciones estan solamente habilitadas para administradores"
+//       );
+//   }
+// });
 
 app.get("/api/admin", (req, res) => {
   res.render("page.ejs", { productos });
@@ -97,10 +115,24 @@ app.post("/eliminarProd", (req, res) => {
     res.send("Ese producto no existe");
   }
 });
-//routes //
 
-app.use("/api/products", routerProducts);
-app.use("/api/carrito", routerCarrito);
+app.post("/addCarrito", (req, res) => {
+  const total = productos.length;
+  const { id } = req.body;
+  if (id <= total) {
+    function productById(id) {
+      const data = productos;
+      const respuesta = data.find((res) => res.id == id);
+      return respuesta;
+    }
+    const pepe = productById(id);
+    carrito.push(pepe);
+    fs.writeFileSync("carrito/carrito.json", JSON.stringify(carrito), "utf-8");
+    res.send(carrito);
+  } else {
+    res.send("Ese producto no existe");
+  }
+});
 
 app.listen(PORT, () => {
   console.log("trabajan2...");
