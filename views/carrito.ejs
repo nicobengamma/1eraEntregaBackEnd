@@ -14,6 +14,27 @@
     <title>Carrito</title>
   </head>
   <body>
+    <div class="col-md-2 text-center">
+      <div class="card p-2 mx-2 bg-light">
+        <h5>Eliminar Producto</h5>
+        <form
+          action="/api/carrito/eliminarProd"
+          method="post"
+          class="row g-3 needs-validation"
+          novalidate
+        >
+          <div class="form-floating mb-6">
+            <input type="text" class="form-control" name="id" />
+            <label for="floatingInput">ID del Producto</label>
+          </div>
+          <div class="col-12">
+            <button class="btn btn-primary" type="submit">
+              Eliminar Producto
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
     <div class="card col-md-10 mx-5 text-center bg-light">
       <% if(productos.length == 0) { %>
       <h2>No hay productos ingresados !!</h2>

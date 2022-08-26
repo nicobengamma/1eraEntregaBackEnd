@@ -1,6 +1,6 @@
 const express = require("express");
 const { Router } = express;
-const routerAdmin = Router();
+const routerProducts = Router();
 const mongoose = require("mongoose");
 
 const { MongoClient, ServerApiVersion } = require("mongodb");
@@ -13,7 +13,7 @@ const client = new MongoClient(uri, {
 });
 client.connect((err) => {
   const collection = client.db("myFirstDatabase").collection("users");
-  routerAdmin.get("/", (req, res) => {
+  routerProducts.get("/", (req, res) => {
     collection.find({}).toArray((err, data) => {
       if (err) {
         console.log(err);
@@ -23,7 +23,7 @@ client.connect((err) => {
       res.render("page.ejs", { productos });
     });
   });
-  routerAdmin.get("/:id", (req, res) => {
+  routerProducts.get("/:id", (req, res) => {
     const id = req.params.id;
     console.log(id);
     collection.find({ id: id }).toArray((err, data) => {
@@ -35,7 +35,7 @@ client.connect((err) => {
       res.render("page.ejs", { productos });
     });
   });
-  routerAdmin.post("/addProd", (req, res) => {
+  routerProducts.post("/addProd", (req, res) => {
     collection.find({}).toArray((err, data) => {
       if (err) {
         console.log(err);
@@ -85,7 +85,7 @@ client.connect((err) => {
       }
     });
   });
-  routerAdmin.post("/actualizarProd", (req, res) => {
+  routerProducts.post("/actualizarProd", (req, res) => {
     const { id, name, price, url, descripcion, codigo, stock } = req.body;
     if (name && price && url && id && descripcion && codigo && stock) {
       mongoose.connect(uri, {}, (error) => {
@@ -127,7 +127,7 @@ client.connect((err) => {
       }, 2000);
     }
   });
-  routerAdmin.post("/eliminarProd", (req, res) => {
+  routerProducts.post("/eliminarProd", (req, res) => {
     collection.find({}).toArray((err, data) => {
       if (err) {
         console.log(err);
@@ -172,4 +172,4 @@ client.connect((err) => {
   });
 });
 
-module.exports = routerAdmin;
+module.exports = routerProducts;

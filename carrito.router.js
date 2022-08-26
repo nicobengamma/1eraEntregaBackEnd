@@ -61,25 +61,47 @@ client.connect((err) => {
             console.log("Se agrego al carrito");
           });
           setTimeout(() => {
-            collectionCarrito.find({}).toArray((err, data) => {
-              const productos = data;
-              res.render("carrito.ejs", { productos });
-            });
-          }, 1000);
+            res.redirect("/api/carrito/Products");
+          }, 2000);
         });
       }
     });
   });
 
-  routerCarrito.delete("/:id", (req, res) => {
-    const { id } = req.params;
-    carrito.forEach((e, i) => {
-      if (e.idCarrito == id) {
-        carrito.splice(i, 1);
+  routerCarrito.post("/eliminarProd", (req, res) => {
+    const { id } = req.body;
+    const collectionCarrito = client.db("myFirstDatabase").collection("carts");
+    collectionCarrito.find({}).toArray((err, data) => {
+      if (err) {
+        console.log(err);
+      }
+      const prodInCart = data;
+      const total = prodInCart.length;
+      if (id) {
+        mongoose.connect(uri, {}, (err) => {
+          if (err) console.log(err);
+          return;
+        });
+        const Carts = mongoose.model("carts", {
+          id: Number,
+          name: String,
+          descripcion: String,
+          codigo: Number,
+          price: Number,
+          stock: Number,
+          url: String,
+        });
+        Carts.findOneAndDelete({ id: id }, (err, docs) => {
+          if (err) {
+            console.log(err);
+          }
+          console.log(docs);
+        });
+        setTimeout(() => {
+          res.redirect("/api/carrito/Products");
+        }, 3000);
       }
     });
-    fs.writeFileSync("carrito/carrito.json", JSON.stringify(carrito), "utf-8");
-    res.send(carrito);
   });
 
   routerCarrito.get("/products", (req, res) => {
