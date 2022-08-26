@@ -3,6 +3,7 @@ const { Router } = express;
 const routerCarrito = Router();
 const mongoose = require("mongoose");
 const client = require("./server");
+const Users = require("./schema.users");
 const uri =
   "mongodb+srv://admin:admin@cluster0.uo708jn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
@@ -14,15 +15,6 @@ client.connect((err) => {
       console.log(err);
       return;
     }
-  });
-  const Users = mongoose.model("users", {
-    id: Number,
-    name: String,
-    descripcion: String,
-    codigo: Number,
-    price: Number,
-    stock: Number,
-    url: String,
   });
   const Carrito = mongoose.model("cart", {
     id: Number,

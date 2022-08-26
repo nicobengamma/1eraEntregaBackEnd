@@ -2,15 +2,11 @@ const express = require("express");
 const { Router } = express;
 const routerProducts = Router();
 const mongoose = require("mongoose");
-
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const client = require("./server");
+const Users = require("./schema.users");
 const uri =
   "mongodb+srv://admin:admin@cluster0.uo708jn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-const client = new MongoClient(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  serverApi: ServerApiVersion.v1,
-});
+
 client.connect((err) => {
   const collection = client.db("myFirstDatabase").collection("users");
   routerProducts.get("/", (req, res) => {
@@ -52,15 +48,6 @@ client.connect((err) => {
           }
           console.log("db connected");
         });
-        const Users = mongoose.model("users", {
-          id: Number,
-          name: String,
-          descripcion: String,
-          codigo: Number,
-          price: Number,
-          stock: Number,
-          url: String,
-        });
         const nuevoUsuario = new Users({
           id: id,
           name: req.body.name,
@@ -94,15 +81,7 @@ client.connect((err) => {
           return;
         }
       });
-      const Users = mongoose.model("users", {
-        id: Number,
-        name: String,
-        descripcion: String,
-        codigo: Number,
-        price: Number,
-        stock: Number,
-        url: String,
-      });
+
       Users.findOneAndUpdate(
         { id: id },
         {
@@ -143,15 +122,7 @@ client.connect((err) => {
             return;
           }
         });
-        const Users = mongoose.model("users", {
-          id: Number,
-          name: String,
-          descripcion: String,
-          codigo: Number,
-          price: Number,
-          stock: Number,
-          url: String,
-        });
+
         Users.findOneAndRemove({ id: id }, function (err, docs) {
           if (err) {
             console.log(err);
