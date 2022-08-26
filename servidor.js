@@ -20,14 +20,14 @@ const Users = mongoose.model("users", {
   url: String,
 });
 
-// const nuevoUsuario = new Users({
-//   id: 3,
-//   name: "El Pepe",
-//   descripcion: "Es el pepeee",
-//   codigo: "4",
-//   price: "100.000",
-//   stock: "1",
-//   url: "https://www.sopitas.com/wp-content/uploads/2020/10/meme-el-pepe-ete-sech-origen.png",
-// });
+const nuevoUsuario = new Users({
+  id: 3,
+  name: "El Pepe",
+  descripcion: "Es el pepeee",
+  codigo: "4",
+  price: "100.000",
+  stock: "1",
+  url: "https://www.sopitas.com/wp-content/uploads/2020/10/meme-el-pepe-ete-sech-origen.png",
+});
 
-// nuevoUsuario.save().then(() => console.log("dato guardado"));
+nuevoUsuario.save().then(() => console.log("dato guardado"));
