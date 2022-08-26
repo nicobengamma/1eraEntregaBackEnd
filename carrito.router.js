@@ -9,6 +9,39 @@ const uri =
 client.connect((err) => {
   const collection = client.db("myFirstDatabase").collection("users");
   const collectionCarrito = client.db("myFirstDatabase").collection("carts");
+  mongoose.connect(uri, {}, (err) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+  });
+  const Users = mongoose.model("users", {
+    id: Number,
+    name: String,
+    descripcion: String,
+    codigo: Number,
+    price: Number,
+    stock: Number,
+    url: String,
+  });
+  const Carrito = mongoose.model("cart", {
+    id: Number,
+    name: String,
+    descripcion: String,
+    codigo: Number,
+    price: Number,
+    stock: Number,
+    url: String,
+  });
+  const Carts = mongoose.model("carts", {
+    id: Number,
+    name: String,
+    descripcion: String,
+    codigo: Number,
+    price: Number,
+    stock: Number,
+    url: String,
+  });
   routerCarrito.post("/addCarrito", (req, res) => {
     collection.find({}).toArray((err, data) => {
       if (err) {
@@ -19,35 +52,11 @@ client.connect((err) => {
       const total = productos.length;
       const { id } = req.body;
       if (id <= total) {
-        mongoose.connect(uri, {}, (err) => {
-          if (err) {
-            console.log(err);
-            return;
-          }
-        });
-        const Users = mongoose.model("users", {
-          id: Number,
-          name: String,
-          descripcion: String,
-          codigo: Number,
-          price: Number,
-          stock: Number,
-          url: String,
-        });
         Users.find({ id: id }, function (err, docs) {
           if (err) {
             console.log(err);
           }
           console.log(docs[0].name);
-          const Carrito = mongoose.model("cart", {
-            id: Number,
-            name: String,
-            descripcion: String,
-            codigo: Number,
-            price: Number,
-            stock: Number,
-            url: String,
-          });
           const addCart = new Carrito({
             id: id,
             name: docs[0].name,
@@ -67,7 +76,6 @@ client.connect((err) => {
       }
     });
   });
-
   routerCarrito.post("/eliminarProd", (req, res) => {
     const { id } = req.body;
     const collectionCarrito = client.db("myFirstDatabase").collection("carts");
@@ -78,19 +86,6 @@ client.connect((err) => {
       const prodInCart = data;
       const total = prodInCart.length;
       if (id) {
-        mongoose.connect(uri, {}, (err) => {
-          if (err) console.log(err);
-          return;
-        });
-        const Carts = mongoose.model("carts", {
-          id: Number,
-          name: String,
-          descripcion: String,
-          codigo: Number,
-          price: Number,
-          stock: Number,
-          url: String,
-        });
         Carts.findOneAndDelete({ id: id }, (err, docs) => {
           if (err) {
             console.log(err);

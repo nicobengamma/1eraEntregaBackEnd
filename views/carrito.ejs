@@ -14,8 +14,14 @@
     <title>Carrito</title>
   </head>
   <body>
-    <div class="col-md-2 text-center">
-      <div class="card p-2 mx-2 bg-light">
+    <h2 class="title text-center">Carrito</h2>
+    <div>
+      <a href="/api/products">
+        <button class="btn btn-success m-2">Volver</button>
+      </a>
+    </div>
+    <div class="col-md-2 p-2">
+      <div class="card p-2 m-auto bg-light">
         <h5>Eliminar Producto</h5>
         <form
           action="/api/carrito/eliminarProd"
