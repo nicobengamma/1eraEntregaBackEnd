@@ -13,7 +13,7 @@ const client = new MongoClient(uri, {
 });
 client.connect((err) => {
   const collection = client.db("myFirstDatabase").collection("users");
-  const collectionCarrito = client.db("myFirstDatabase").collection("cart");
+  const collectionCarrito = client.db("myFirstDatabase").collection("carts");
   routerAdmin.get("/", (req, res) => {
     collection.find({}).toArray((err, data) => {
       if (err) {
@@ -168,61 +168,6 @@ client.connect((err) => {
         }, 2000);
       } else {
         res.send("Ese producto no existe");
-      }
-    });
-  });
-  routerAdmin.post("/addCarrito", (req, res) => {
-    collection.find({}).toArray((err, data) => {
-      if (err) {
-        console.log(err);
-        return res.sendStatus(500);
-      }
-      const productos = data;
-      const total = productos.length;
-      const { id } = req.body;
-      if (id <= total) {
-        mongoose.connect(uri, {}, (err) => {
-          if (err) {
-            console.log(err);
-            return;
-          }
-        });
-        const Users = mongoose.model("users", {
-          id: Number,
-          name: String,
-          descripcion: String,
-          codigo: Number,
-          price: Number,
-          stock: Number,
-          url: String,
-        });
-        Users.find({ id: id }, function (err, docs) {
-          if (err) {
-            console.log(err);
-          }
-          console.log(docs[0].name);
-          const Carrito = mongoose.model("cart", {
-            id: Number,
-            name: String,
-            descripcion: String,
-            codigo: Number,
-            price: Number,
-            stock: Number,
-            url: String,
-          });
-          const addCart = new Carrito({
-            id: id,
-            name: docs[0].name,
-            descripcion: docs[0].descripcion,
-            codigo: docs[0].codigo,
-            price: docs[0].price,
-            stock: docs[0].stock,
-            url: docs[0].url,
-          });
-          addCart.save().then(() => {
-            console.log("Se agrego al carrito");
-          });
-        });
       }
     });
   });
