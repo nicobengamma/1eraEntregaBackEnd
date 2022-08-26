@@ -83,7 +83,10 @@ client.connect((err) => {
   });
 
   routerCarrito.get("/products", (req, res) => {
-    res.send(carrito);
+    collectionCarrito.find({}).toArray((err, data) => {
+      const productos = data;
+      res.render("carrito.ejs", { productos });
+    });
   });
 
   routerCarrito.post("/:id/products", (req, res) => {

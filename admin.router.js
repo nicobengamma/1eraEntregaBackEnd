@@ -13,7 +13,6 @@ const client = new MongoClient(uri, {
 });
 client.connect((err) => {
   const collection = client.db("myFirstDatabase").collection("users");
-  const collectionCarrito = client.db("myFirstDatabase").collection("carts");
   routerAdmin.get("/", (req, res) => {
     collection.find({}).toArray((err, data) => {
       if (err) {
