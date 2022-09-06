@@ -1,6 +1,6 @@
 const express = require("express");
-const routerCarrito = require("./carrito.router");
-const routerProducts = require("./products.router");
+const routerCarrito = require("./routes/carrito.router");
+const routerProducts = require("./routes/products.router");
 
 const PORT = 8080;
 

@@ -2,8 +2,8 @@ const express = require("express");
 const { Router } = express;
 const routerCarrito = Router();
 const mongoose = require("mongoose");
-const client = require("./server");
-const Users = require("./schema.users");
+const client = require("../mongoDB/server");
+const Users = require("../mongoDB/schema.users");
 const uri =
   "mongodb+srv://admin:admin@cluster0.uo708jn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
