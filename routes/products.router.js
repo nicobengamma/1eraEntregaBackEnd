@@ -20,6 +20,16 @@ client.connect((err) => {
       res.render("page.ejs", { productos });
     });
   });
+  routerProducts.get("/admin", (req, res) => {
+    collection.find({}).toArray((err, data) => {
+      if (err) {
+        console.log(err);
+        return res.sendStatus(500);
+      }
+      const productos = data;
+      res.render("admin.ejs", { productos });
+    });
+  });
   routerProducts.get("/:id", (req, res) => {
     const id = req.params.id;
     console.log(id);

@@ -61,7 +61,7 @@ client.connect(() => {
         if (!r) {
           res.sendStatus(403);
         }
-        res.send("Usted ah iniciado sesion correctamente");
+        res.redirect("/api/products/admin");
       })
       .catch((err) => console.log(err));
   });
