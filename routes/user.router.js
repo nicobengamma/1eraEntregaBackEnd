@@ -43,7 +43,28 @@ client.connect(() => {
       }
     });
   });
-  routerUser.post("/login", (req, res) => {});
+  routerUser.post("/inicio", (req, res) => {
+    const { usuario, password } = req.body;
+    usuarios
+      .findOne({ usuario: usuario })
+      .then((r) => {
+        if (r) {
+          mongoose.connect(uri, {}, (error) => {
+            if (error) {
+              console.log(error);
+            }
+          });
+          return bcrypt.compare(password, r.password);
+        }
+      })
+      .then((r) => {
+        if (!r) {
+          res.sendStatus(403);
+        }
+        res.send("Usted ah iniciado sesion correctamente");
+      })
+      .catch((err) => console.log(err));
+  });
 });
 
 module.exports = routerUser;
