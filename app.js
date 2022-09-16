@@ -7,16 +7,18 @@ const PORT = 8080;
 
 const app = express();
 
-//middleware //
+// Middleware //
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: "true" }));
 
-//routes //
+// Routes //
 
 app.use("/api/carrito", routerCarrito);
 app.use("/api/products", routerProducts);
 app.use("/api/user", routerUser);
+
+// PORT //
 
 app.listen(PORT, () => {
   console.log("trabajan2...");
