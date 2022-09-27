@@ -2,8 +2,9 @@ const express = require("express");
 const routerCarrito = require("./routes/carrito.router");
 const routerProducts = require("./routes/products.router");
 const routerUser = require("./routes/user.router");
+require("dotenv").config();
 
-const PORT = 8080;
+const PORT = process.env.PORT;
 
 const app = express();
 
