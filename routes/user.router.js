@@ -59,7 +59,7 @@ client.connect(() => {
       })
       .then((r) => {
         if (!r) {
-          res.sendStatus(403);
+          res.send("El usuario no existe en nuestra base de datos");
         }
         res.redirect("/api/products/admin");
       })
