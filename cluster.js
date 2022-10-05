@@ -7,9 +7,9 @@ if (cluster.isMaster) {
   for (let i = 0; i < numCpus; i++) {
     cluster.fork();
   }
-
   cluster.on("exit", (worker, code, signal) => {
-    console.log(`worker ${worker.process.pid} died :()`);
+    console.log(`worker ${worker.process.pid} died :(), Reinician2`);
+    cluster.fork();
   });
 } else {
   http
