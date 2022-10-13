@@ -6,7 +6,7 @@ const routerProducts = Router();
 
 const log4js = require("log4js");
 const typeLogg = process.env.NODE_ENV == "Production" ? "prod" : "consola";
-const logger22 = log4js.getLogger(typeLogg);
+const logger = log4js.getLogger(typeLogg);
 
 //-----------------//
 const mongoose = require("mongoose");
@@ -21,7 +21,7 @@ client.connect((err) => {
   routerProducts.get("/", (req, res) => {
     collection.find({}).toArray((err, data) => {
       if (err) {
-        console.log(err);
+        logger.error(err);
         return res.sendStatus(500);
       }
       const productos = data;
@@ -31,7 +31,7 @@ client.connect((err) => {
   routerProducts.get("/admin", (req, res) => {
     collection.find({}).toArray((err, data) => {
       if (err) {
-        console.log(err);
+        logger.error(err);
         return res.sendStatus(500);
       }
       const productos = data;
@@ -43,7 +43,7 @@ client.connect((err) => {
     console.log(id);
     collection.find({ id: id }).toArray((err, data) => {
       if (err) {
-        console.log(err);
+        logger.error(err);
         return res.sendStatus(500);
       }
       const productos = data;
@@ -53,7 +53,7 @@ client.connect((err) => {
   routerProducts.post("/addProd", (req, res) => {
     collection.find({}).toArray((err, data) => {
       if (err) {
-        console.log(err);
+        logger.error(err);
         return res.sendStatus(500);
       }
       const productosBefore = data;
@@ -62,7 +62,7 @@ client.connect((err) => {
         const id = productosBefore.length + 1;
         mongoose.connect(uri, {}, (error) => {
           if (error) {
-            console.log(error);
+            logger.error(err);
             return;
           }
           console.log("db connected");
@@ -96,7 +96,7 @@ client.connect((err) => {
     if (name && price && url && id && descripcion && codigo && stock) {
       mongoose.connect(uri, {}, (error) => {
         if (error) {
-          console.log(error);
+          logger.error(err);
           return;
         }
       });
@@ -113,7 +113,7 @@ client.connect((err) => {
         },
         function (err, docs) {
           if (err) {
-            console.log(err);
+            logger.error(err);
           }
         }
       );
@@ -128,7 +128,7 @@ client.connect((err) => {
   routerProducts.post("/eliminarProd", (req, res) => {
     collection.find({}).toArray((err, data) => {
       if (err) {
-        console.log(err);
+        logger.error(err);
         return res.sendStatus(500);
       }
       const productos = data;
@@ -137,14 +137,14 @@ client.connect((err) => {
       if (id <= total) {
         mongoose.connect(uri, {}, (error) => {
           if (error) {
-            console.log(error);
+            logger.error(err);
             return;
           }
         });
 
         Users.findOneAndRemove({ id: id }, function (err, docs) {
           if (err) {
-            console.log(err);
+            logger.error(err);
           } else {
             console.log("Removed User : ", docs);
           }

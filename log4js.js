@@ -8,15 +8,16 @@ log4js.configure({
   },
   categories: {
     default: { appenders: ["loggerRegistro", "loggerFile"], level: "trace" },
-    console: { appenders: ["loggerRegistro"], level: "debug" },
-    archivo2: { appenders: ["loggerFile2"], level: "info" },
   },
 });
 
-const logger = log4js.getLogger("console");
-logger.trace("hello");
-logger.debug("hello-debug");
-logger.info("es una info");
-logger.warn("es un warning");
-logger.error("error error");
-logger.fatal("se rompio todo");
+const logger = log4js.getLogger("default");
+
+// logger.trace("hello");
+// logger.debug("hello-debug");
+// logger.info("es una info");
+// logger.warn("es un warning");
+// logger.error("error error");
+// logger.fatal("se rompio todo");
+
+module.exports = logger;

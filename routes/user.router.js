@@ -6,6 +6,7 @@ const client = require("../mongoDB/server");
 const Users = require("../mongoDB/schema.users");
 const Logins = require("../mongoDB/schema.logins");
 const bcrypt = require("bcrypt");
+const logger = require("../log4js");
 
 const uri =
   "mongodb+srv://admin:admin@cluster0.uo708jn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
@@ -22,7 +23,7 @@ client.connect(() => {
       if (!r) {
         mongoose.connect(uri, {}, (err) => {
           if (err) {
-            console.log(err);
+            logger.warn(err);
           }
         });
         bcrypt.hash(password, 12).then(function (hashedPassword) {
@@ -59,11 +60,12 @@ client.connect(() => {
       })
       .then((r) => {
         if (!r) {
+          logger.info("Usuario no existente");
           res.send("El usuario no existe en nuestra base de datos");
         }
         res.redirect("/api/products/admin");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => logger.error(err));
   });
 });
 
