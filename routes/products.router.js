@@ -1,6 +1,14 @@
 const express = require("express");
 const { Router } = express;
 const routerProducts = Router();
+
+//-----------------//
+
+const log4js = require("log4js");
+const typeLogg = process.env.NODE_ENV == "Production" ? "prod" : "consola";
+const logger22 = log4js.getLogger(typeLogg);
+
+//-----------------//
 const mongoose = require("mongoose");
 const client = require("../mongoDB/server");
 const Users = require("../mongoDB/schema.users");
