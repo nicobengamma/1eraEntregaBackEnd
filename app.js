@@ -29,6 +29,4 @@ app.get("/", (req, res) => {
 
 // PORT //
 
-app.listen(config.PORT, HOST, () => {
-  console.log(`app listen on http://${HOST}:${config.PORT}`);
-});
+app.listen(8080);
