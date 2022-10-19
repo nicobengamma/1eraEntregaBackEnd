@@ -23,6 +23,9 @@ app.use("/api/products", routerProducts);
 app.use("/api/user", routerUser);
 app.use("/info", routerInfo);
 app.use("/api/randoms", routerRandoms);
+app.get("/", (req, res) => {
+  res.send("ok");
+});
 
 // PORT //
 
