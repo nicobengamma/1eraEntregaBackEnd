@@ -10,11 +10,9 @@ const logger = log4js.getLogger(typeLogg);
 
 //-----------------//
 const mongoose = require("mongoose");
-const client = require("../mongoDB/server");
-const Users = require("../mongoDB/schema.users");
-const Logins = require("../mongoDB/schema.logins");
-const uri =
-  "mongodb+srv://admin:admin@cluster0.uo708jn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const { client, uri } = require("../controllers/server");
+const Users = require("../controllers/schema.users");
+const Logins = require("../controllers/schema.logins");
 
 client.connect((err) => {
   const collection = client.db("myFirstDatabase").collection("users");

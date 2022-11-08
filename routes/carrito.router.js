@@ -2,10 +2,10 @@ const express = require("express");
 const { Router } = express;
 const routerCarrito = Router();
 const mongoose = require("mongoose");
-const client = require("../mongoDB/server");
-const Users = require("../mongoDB/schema.users");
-const uri =
-  "mongodb+srv://admin:admin@cluster0.uo708jn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const { Users, Carrito, Carts } = require("../controllers/schema.users");
+const { client, uri } = require("../controllers/server");
+
+//--- JHASDQPLMCN ----//
 
 client.connect((err) => {
   const collection = client.db("myFirstDatabase").collection("users");
@@ -15,24 +15,6 @@ client.connect((err) => {
       console.log(err);
       return;
     }
-  });
-  const Carrito = mongoose.model("cart", {
-    id: Number,
-    name: String,
-    descripcion: String,
-    codigo: Number,
-    price: Number,
-    stock: Number,
-    url: String,
-  });
-  const Carts = mongoose.model("carts", {
-    id: Number,
-    name: String,
-    descripcion: String,
-    codigo: Number,
-    price: Number,
-    stock: Number,
-    url: String,
   });
   routerCarrito.post("/addCarrito", (req, res) => {
     collection.find({}).toArray((err, data) => {

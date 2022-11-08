@@ -2,14 +2,11 @@ const express = require("express");
 const { Router } = express;
 const routerUser = Router();
 const mongoose = require("mongoose");
-const client = require("../mongoDB/server");
-const Users = require("../mongoDB/schema.users");
-const Logins = require("../mongoDB/schema.logins");
+const { client, uri } = require("../controllers/server");
+const Users = require("../controllers/schema.users");
+const Logins = require("../controllers/schema.logins");
 const bcrypt = require("bcrypt");
 const logger = require("../log4js");
-
-const uri =
-  "mongodb+srv://admin:admin@cluster0.uo708jn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 client.connect(() => {
   const collection = client.db("myFirstDatabase").collection("users");
