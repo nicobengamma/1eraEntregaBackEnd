@@ -1,13 +1,10 @@
 const express = require("express");
-const routerCarrito = require("./routes/carrito.router");
-const routerProducts = require("./routes/products.router");
-const routerUser = require("./routes/user.router");
-const routerInfo = require("./routes/info.router");
-const routerRandoms = require("./routes/randoms.router");
+const routerCarrito = require("../routes/carrito.router");
+const routerProducts = require("../routes/products.router");
+const routerUser = require("../routes/user.router");
+const routerInfo = require("../routes/info.router");
+const routerRandoms = require("../routes/randoms.router");
 const config = require("./config");
-require("dotenv").config();
-
-const HOST = process.env.HOST;
 
 const app = express();
 

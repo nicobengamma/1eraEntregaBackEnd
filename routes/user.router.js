@@ -6,7 +6,7 @@ const { client, uri } = require("../controllers/server");
 const Users = require("../controllers/schema.users");
 const Logins = require("../controllers/schema.logins");
 const bcrypt = require("bcrypt");
-const logger = require("../log4js");
+const logger = require("../server/log4js");
 
 client.connect(() => {
   const collection = client.db("myFirstDatabase").collection("users");
