@@ -11,8 +11,7 @@ const logger = log4js.getLogger(typeLogg);
 //-----------------//
 const mongoose = require("mongoose");
 const { client, uri } = require("../controllers/server");
-const Users = require("../controllers/schema.users");
-const Logins = require("../controllers/schema.logins");
+const { Users, nuevoUsuario } = require("../controllers/schema.users");
 
 client.connect((err) => {
   const collection = client.db("myFirstDatabase").collection("users");
@@ -65,15 +64,6 @@ client.connect((err) => {
           }
           console.log("db connected");
         });
-        const nuevoUsuario = new Users({
-          id: id,
-          name: req.body.name,
-          descripcion: req.body.descripcion,
-          codigo: req.body.codigo,
-          price: req.body.price,
-          stock: req.body.stock,
-          url: req.body.url,
-        });
         nuevoUsuario.save().then(() => console.log("dato guardado"));
         setTimeout(() => {
           collection.find({}).toArray((err, data) => {
@@ -98,7 +88,6 @@ client.connect((err) => {
           return;
         }
       });
-
       Users.findOneAndUpdate(
         { id: id },
         {

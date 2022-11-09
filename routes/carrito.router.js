@@ -2,7 +2,12 @@ const express = require("express");
 const { Router } = express;
 const routerCarrito = Router();
 const mongoose = require("mongoose");
-const { Users, Carrito, Carts } = require("../controllers/schema.users");
+const {
+  Users,
+  Carrito,
+  Carts,
+  addCart,
+} = require("../controllers/schema.users");
 const { client, uri } = require("../controllers/server");
 
 //--- JHASDQPLMCN ----//
@@ -31,15 +36,6 @@ client.connect((err) => {
             console.log(err);
           }
           console.log(docs[0].name);
-          const addCart = new Carrito({
-            id: id,
-            name: docs[0].name,
-            descripcion: docs[0].descripcion,
-            codigo: docs[0].codigo,
-            price: docs[0].price,
-            stock: docs[0].stock,
-            url: docs[0].url,
-          });
           addCart.save().then(() => {
             console.log("Se agrego al carrito");
           });
